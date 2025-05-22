@@ -1,8 +1,10 @@
+// src/main.js
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import App from './App.vue'
 import router from './router'
 import { focusDirective } from './directives/focus'
+import ModernButton from './components/ModernButton.vue'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap-icons/font/bootstrap-icons.css'
 import './assets/main.css'
@@ -13,4 +15,5 @@ const pinia = createPinia()
 app.use(pinia)
 app.use(router)
 app.directive('focus', focusDirective)
+app.component('ModernButton', ModernButton)
 app.mount('#app')
