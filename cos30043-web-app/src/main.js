@@ -7,6 +7,7 @@ import { focusDirective } from './directives/focus'
 import ModernButton from './components/ModernButton.vue'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap-icons/font/bootstrap-icons.css'
+import 'bootstrap/dist/js/bootstrap.bundle.min.js'  // Add this line
 import './assets/main.css'
 
 const app = createApp(App)

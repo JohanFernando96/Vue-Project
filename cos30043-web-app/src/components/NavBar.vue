@@ -9,34 +9,32 @@
       <button 
         class="navbar-toggler" 
         type="button" 
-        data-bs-toggle="collapse" 
-        data-bs-target="#navbarNav" 
-        aria-controls="navbarNav" 
+        @click="toggleMobileMenu"
         aria-expanded="false" 
         aria-label="Toggle navigation"
       >
         <span class="navbar-toggler-icon"></span>
       </button>
       
-      <div class="collapse navbar-collapse" id="navbarNav">
+      <div class="collapse navbar-collapse" :class="{ 'show': showMobileMenu }" id="navbarNav">
         <ul class="navbar-nav me-auto">
           <li class="nav-item">
-            <router-link class="nav-link nav-link-modern" to="/">
+            <router-link class="nav-link nav-link-modern" to="/" @click="closeMobileMenu">
               <i class="bi bi-house-door me-1"></i>Home
             </router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link nav-link-modern" to="/courses">
+            <router-link class="nav-link nav-link-modern" to="/courses" @click="closeMobileMenu">
               <i class="bi bi-book me-1"></i>Courses
             </router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link nav-link-modern" to="/news">
+            <router-link class="nav-link nav-link-modern" to="/news" @click="closeMobileMenu">
               <i class="bi bi-newspaper me-1"></i>News
             </router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link nav-link-modern" to="/about">
+            <router-link class="nav-link nav-link-modern" to="/about" @click="closeMobileMenu">
               <i class="bi bi-info-circle me-1"></i>About
             </router-link>
           </li>
@@ -44,52 +42,21 @@
         
         <!-- Not Authenticated -->
         <div class="d-flex align-items-center gap-2" v-if="!isAuthenticated">
-          <router-link to="/login" class="btn btn-outline-light btn-modern">
+          <router-link to="/login" class="btn btn-outline-light btn-modern" @click="closeMobileMenu">
             <i class="bi bi-box-arrow-in-right me-1"></i>Login
           </router-link>
-          <router-link to="/register" class="btn btn-light btn-modern">
+          <router-link to="/register" class="btn btn-light btn-modern" @click="closeMobileMenu">
             <i class="bi bi-person-plus me-1"></i>Register
           </router-link>
         </div>
         
         <!-- Authenticated User -->
-        <div class="dropdown" v-else>
-          <button 
-            class="btn btn-outline-light dropdown-toggle btn-modern user-menu-btn" 
-            type="button" 
-            id="userDropdown" 
-            data-bs-toggle="dropdown" 
-            aria-expanded="false"
-          >
-            <div class="user-avatar">
-              <i class="bi bi-person-circle"></i>
-            </div>
-            <span class="user-name">{{ fullName }}</span>
-          </button>
-          <ul class="dropdown-menu dropdown-menu-end modern-dropdown" aria-labelledby="userDropdown">
-            <li>
-              <router-link class="dropdown-item modern-dropdown-item" to="/dashboard">
-                <i class="bi bi-speedometer2 me-2"></i>Dashboard
-              </router-link>
-            </li>
-            <li>
-              <router-link class="dropdown-item modern-dropdown-item" to="/profile">
-                <i class="bi bi-person me-2"></i>Profile
-              </router-link>
-            </li>
-            <li v-if="isAdmin">
-              <router-link class="dropdown-item modern-dropdown-item" to="/admin">
-                <i class="bi bi-gear me-2"></i>Admin Panel
-              </router-link>
-            </li>
-            <li><hr class="dropdown-divider"></li>
-            <li>
-              <button class="dropdown-item modern-dropdown-item logout-btn" @click="logout">
-                <i class="bi bi-box-arrow-right me-2"></i>Logout
-              </button>
-            </li>
-          </ul>
-        </div>
+        <CustomDropdown 
+          v-else
+          :full-name="fullName"
+          :is-admin="isAdmin"
+          @logout="logout"
+        />
       </div>
     </div>
   </nav>
@@ -98,9 +65,18 @@
 <script>
 import { useAuthStore } from '../store/auth';
 import { storeToRefs } from 'pinia';
+import CustomDropdown from './CustomDropdown.vue';
 
 export default {
   name: 'NavBar',
+  components: {
+    CustomDropdown
+  },
+  data() {
+    return {
+      showMobileMenu: false
+    }
+  },
   setup() {
     const authStore = useAuthStore();
     const { isAuthenticated, isAdmin, fullName } = storeToRefs(authStore);
@@ -118,6 +94,14 @@ export default {
       fullName,
       logout
     };
+  },
+  methods: {
+    toggleMobileMenu() {
+      this.showMobileMenu = !this.showMobileMenu;
+    },
+    closeMobileMenu() {
+      this.showMobileMenu = false;
+    }
   }
 }
 </script>
