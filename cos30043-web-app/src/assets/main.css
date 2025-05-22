@@ -1,0 +1,85 @@
+/* src/assets/main.css */
+:root {
+  --primary-color: #3498db;
+  --secondary-color: #2c3e50;
+  --success-color: #2ecc71;
+  --warning-color: #f39c12;
+  --danger-color: #e74c3c;
+  --light-color: #f8f9fa;
+  --dark-color: #343a40;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #f8f9fa;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin-bottom: 1rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #1b6ec6;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+  background-color: #1b6ec6;
+  border-color: #1b6ec6;
+}
+
+.bg-primary {
+  background-color: var(--primary-color) !important;
+}
+
+.navbar {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+footer {
+  margin-top: auto;
+}
+
+/* Improved accessibility for focus states */
+:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+/* Custom animation for page transitions */
+.router-view-transition {
+  transition: opacity 0.3s ease;
+}
+
+.router-view-enter-from,
+.router-view-leave-to {
+  opacity: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 767.98px) {
+  .container {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .container {
+    max-width: 95%;
+  }
+}

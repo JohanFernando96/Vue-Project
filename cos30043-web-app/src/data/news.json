@@ -1,0 +1,86 @@
+[
+  {
+    "id": 1,
+    "date": "2025-05-01",
+    "title": "New Vue 3.7 Release",
+    "content": "Vue.js team announces the release of Vue 3.7 with improved performance and new features.",
+    "category": "Technology"
+  },
+  {
+    "id": 2,
+    "date": "2025-04-28",
+    "title": "Web Development Trends",
+    "content": "Latest trends in web development focus on performance optimization and accessibility.",
+    "category": "Development"
+  },
+  {
+    "id": 3,
+    "date": "2025-04-25",
+    "title": "Bootstrap 6 Preview",
+    "content": "Bootstrap 6 preview shows radical redesign and improved component library.",
+    "category": "Design"
+  },
+  {
+    "id": 4,
+    "date": "2025-04-20",
+    "title": "JavaScript Performance Tips",
+    "content": "New techniques for optimizing JavaScript performance in modern web applications.",
+    "category": "Development"
+  },
+  {
+    "id": 5,
+    "date": "2025-04-15",
+    "title": "CSS Grid Mastery",
+    "content": "Advanced techniques for mastering CSS Grid in complex layouts.",
+    "category": "Design"
+  },
+  {
+    "id": 6,
+    "date": "2025-04-10",
+    "title": "Vite 5.0 Released",
+    "content": "Vite 5.0 brings even faster build times and improved developer experience.",
+    "category": "Technology"
+  },
+  {
+    "id": 7,
+    "date": "2025-04-05",
+    "title": "AI in Web Development",
+    "content": "How artificial intelligence is changing the landscape of web development.",
+    "category": "Technology"
+  },
+  {
+    "id": 8,
+    "date": "2025-04-01",
+    "title": "Accessibility Guidelines Updated",
+    "content": "WCAG releases new guidelines for web accessibility standards.",
+    "category": "Accessibility"
+  },
+  {
+    "id": 9,
+    "date": "2025-03-28",
+    "title": "Mobile-First Development",
+    "content": "Why mobile-first development is still crucial in 2025.",
+    "category": "Development"
+  },
+  {
+    "id": 10,
+    "date": "2025-03-25",
+    "title": "UI Design Principles",
+    "content": "Essential UI design principles every web developer should know.",
+    "category": "Design"
+  },
+  {
+    "id": 11,
+    "date": "2025-03-20",
+    "title": "Vue Composition API Tips",
+    "content": "Advanced tips for working with Vue's Composition API.",
+    "category": "Development"
+  },
+  {
+    "id": 12,
+    "date": "2025-03-15",
+    "title": "TypeScript Best Practices",
+    "content": "Best practices for using TypeScript in modern web applications.",
+    "category": "Development"
+  }
+]
