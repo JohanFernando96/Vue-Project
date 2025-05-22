@@ -535,3 +535,27 @@ html {
 .hero-actions .btn-primary:hover {
   color: var(--btn-text-hover-color) !important;
 }
+
+/* Dropdown z-index fix */
+.custom-dropdown {
+  z-index: 9999 !important;
+}
+
+.modern-dropdown {
+  z-index: 9999 !important;
+  position: fixed !important; /* Use fixed positioning */
+}
+
+/* Ensure navbar is below dropdowns but above other content */
+.navbar {
+  z-index: 1000 !important;
+}
+
+/* General z-index hierarchy */
+.modal {
+  z-index: 10000 !important;
+}
+
+.dropdown-menu {
+  z-index: 9999 !important;
+}

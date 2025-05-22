@@ -55,7 +55,7 @@
           v-else
           :full-name="fullName"
           :is-admin="isAdmin"
-          @logout="logout"
+          @logout="handleLogout"
         />
       </div>
     </div>
@@ -64,6 +64,7 @@
 
 <script>
 import { useAuthStore } from '../store/auth';
+import { useRouter } from 'vue-router';
 import { storeToRefs } from 'pinia';
 import CustomDropdown from './CustomDropdown.vue';
 
@@ -72,28 +73,23 @@ export default {
   components: {
     CustomDropdown
   },
+  setup() {
+    const authStore = useAuthStore();
+    const router = useRouter();
+    const { isAuthenticated, isAdmin, fullName } = storeToRefs(authStore);
+    
+    return {
+      authStore,
+      router,
+      isAuthenticated,
+      isAdmin,
+      fullName
+    };
+  },
   data() {
     return {
       showMobileMenu: false
     }
-  },
-  setup() {
-    const authStore = useAuthStore();
-    const { isAuthenticated, isAdmin, fullName } = storeToRefs(authStore);
-    
-    const logout = () => {
-      authStore.logout();
-      if (window.location.pathname !== '/') {
-        window.location.href = '/';
-      }
-    };
-    
-    return {
-      isAuthenticated,
-      isAdmin,
-      fullName,
-      logout
-    };
   },
   methods: {
     toggleMobileMenu() {
@@ -101,20 +97,47 @@ export default {
     },
     closeMobileMenu() {
       this.showMobileMenu = false;
+    },
+    async handleLogout() {
+      try {
+        // Call the store logout
+        this.authStore.logout();
+        // Close mobile menu if open
+        this.closeMobileMenu();
+        // Navigate to home page
+        await this.router.push('/');
+        // Force page reload to ensure clean state
+        setTimeout(() => {
+          window.location.reload();
+        }, 100);
+      } catch (error) {
+        console.error('Logout error:', error);
+        // Fallback: force redirect to home
+        window.location.href = '/';
+      }
     }
   }
 }
 </script>
 
 <style scoped>
+/* Keep all your existing styles */
 .navbar {
   background: linear-gradient(135deg, var(--md-primary) 0%, #8b5cf6 50%, var(--md-secondary) 100%);
   box-shadow: var(--md-elevation-3);
   padding: 12px 0;
   backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  z-index: 1000; /* Ensure navbar has proper z-index */
 }
 
+/* Add this to ensure dropdowns appear above other content */
+.navbar .custom-dropdown {
+  z-index: 9999;
+}
+
+/* Rest of your existing styles... */
 .navbar-brand {
   display: flex;
   align-items: center;
@@ -234,64 +257,6 @@ export default {
   color: var(--md-primary) !important;
 }
 
-.user-menu-btn {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 16px;
-  min-width: 120px;
-}
-
-.user-avatar {
-  font-size: 1.5rem;
-  display: flex;
-  align-items: center;
-}
-
-.user-name {
-  font-weight: 500;
-  max-width: 120px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.modern-dropdown {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: var(--md-radius-md);
-  box-shadow: var(--md-elevation-4);
-  padding: 8px 0;
-  margin-top: 12px;
-  min-width: 200px;
-}
-
-.modern-dropdown-item {
-  color: var(--md-on-surface);
-  padding: 12px 20px;
-  transition: all var(--md-motion-quick);
-  display: flex;
-  align-items: center;
-  font-weight: 500;
-  border: none;
-  background: none;
-  width: 100%;
-  text-align: left;
-}
-
-.modern-dropdown-item:hover {
-  background: linear-gradient(135deg, var(--md-primary-container), rgba(103, 80, 164, 0.1));
-  color: var(--md-on-primary-container);
-  transform: translateX(4px);
-  border-radius: 0 var(--md-radius-md) var(--md-radius-md) 0;
-}
-
-.logout-btn:hover {
-  background: linear-gradient(135deg, var(--md-error-container), rgba(186, 26, 26, 0.1));
-  color: var(--md-on-error-container);
-}
-
 .navbar-toggler {
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: var(--md-radius-sm);
@@ -302,11 +267,6 @@ export default {
 .navbar-toggler:hover {
   background: rgba(255, 255, 255, 0.1);
   transform: scale(1.05);
-}
-
-.dropdown-divider {
-  border-color: var(--md-outline-variant);
-  margin: 8px 0;
 }
 
 /* Responsive improvements */
@@ -324,38 +284,23 @@ export default {
   }
 
   .btn-modern {
-   width: 100%;
-   margin: 4px 0;
-   justify-content: center;
- }
- 
- .user-menu-btn {
-   width: 100%;
-   justify-content: center;
-   margin-top: 8px;
- }
+    width: 100%;
+    margin: 4px 0;
+    justify-content: center;
+  }
 }
 
 @media (max-width: 575px) {
- .navbar-brand i {
-   font-size: 1.5rem;
-   margin-right: 8px;
- }
- 
- .user-name {
-   max-width: 100px;
- }
-}
-
-/* Animation for navbar collapse */
-.navbar-collapse {
- transition: all var(--md-motion-medium);
+  .navbar-brand i {
+    font-size: 1.5rem;
+    margin-right: 8px;
+  }
 }
 
 /* Enhanced focus states */
 .nav-link-modern:focus-visible,
 .btn-modern:focus-visible {
- outline: 2px solid rgba(255, 255, 255, 0.8);
- outline-offset: 2px;
+  outline: 2px solid rgba(255, 255, 255, 0.8);
+  outline-offset: 2px;
 }
 </style>
