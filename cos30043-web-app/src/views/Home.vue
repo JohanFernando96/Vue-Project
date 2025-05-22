@@ -15,7 +15,7 @@
       <!-- First Image and Description -->
       <div class="col-md-6 mb-4">
         <div class="card h-100">
-          <img src="https://via.placeholder.com/600x400?text=Vue.js+Development" class="card-img-top" alt="Vue.js Development">
+          <img src="https://www.etelligens.com/wp-content/uploads/2019/10/vue-js-development-company.webp" class="card-img-top" alt="Vue.js Development">
           <div class="card-body">
             <h5 class="card-title">Modern Vue.js Development</h5>
             <p class="card-text">
@@ -29,7 +29,7 @@
       <!-- Second Image and Description -->
       <div class="col-md-6 mb-4">
         <div class="card h-100">
-          <img src="https://via.placeholder.com/600x400?text=Responsive+Design" class="card-img-top" alt="Responsive Design">
+          <img src="https://admin.12grids.com/uploads/blogs/original_cover_images/future-of-responsive-web-design-12grids.jpg" class="card-img-top" alt="Responsive Design">
           <div class="card-body">
             <h5 class="card-title">Responsive Design Principles</h5>
             <p class="card-text">
